@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 
 const FROM = process.env.FROM;
 const PASS = process.env.PASS;
-const TO = 'temirzhan.yussupov@gmail.com';
+const TO = 'temirzhan.yussupov@gmail.com, khafiz.batyrkhan@nu.edu.kz, rauan.omarov@nu.edu.kz';
 
 const transporter = nodemailer.createTransport({
   service: 'gmail',
