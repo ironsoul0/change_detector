@@ -35,6 +35,8 @@ async function getInternships() {
     jobsList.push(`${name} - ${city}`);
   });
   
+  await browser.close();
+  
   return jobsList;
 }
 
