@@ -6,8 +6,15 @@ const sendMail = require('./mail');
 
 async function getInternships() {
   const browser = await puppeteer.launch({
-    headless: true, 
-    args:['--no-sandbox', '--disable-setuid-sandbox']
+    headless: true,
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-gpu',
+      '--disable-dev-shm-usage',
+      '--proxy-server="direct://"',
+      '--proxy-bypass-list=*'
+    ]
   });
 
   const page = await browser.newPage();
