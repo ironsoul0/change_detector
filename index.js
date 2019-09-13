@@ -9,11 +9,7 @@ async function getInternships() {
     headless: true,
     args: [
       '--no-sandbox',
-      '--disable-setuid-sandbox',
-      '--disable-gpu',
-      '--disable-dev-shm-usage',
-      '--proxy-server="direct://"',
-      '--proxy-bypass-list=*'
+      '--disable-setuid-sandbox'
     ]
   });
 
