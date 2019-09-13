@@ -3,6 +3,7 @@ require('dotenv').config()
 const cheerio = require('cheerio');
 const puppeteer = require('puppeteer');
 const express = require('express');
+const axios = require('axios');
 const sendMail = require('./mail');
 
 const app = express();
@@ -10,6 +11,10 @@ const app = express();
 app.listen(process.env.PORT || 5000, function () {
   console.log('Port was assigned..');
 });
+
+setInterval(function() {
+  axios.get('https://bloomberg-checker.herokuapp.com/');
+}, 1000 * 60 * 5);
 
 async function getInternships() {
   const browser = await puppeteer.launch({
