@@ -13,7 +13,13 @@ app.listen(process.env.PORT || 5000, function () {
 });
 
 setInterval(function() {
-  axios.get('https://bloomberg-checker.herokuapp.com/');
+  axios.get('https://bloomberg-checker.herokuapp.com/')
+    .then(function (result) {
+      console.log(result);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 }, 1000 * 60 * 4);
 
 async function getInternships() {
