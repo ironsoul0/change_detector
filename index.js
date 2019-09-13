@@ -18,7 +18,7 @@ setInterval(function() {
       console.log(result);
     })
     .catch(function (error) {
-      console.log(error);
+      console.log('Kek');
     });
 }, 1000 * 60 * 4);
 
