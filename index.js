@@ -1,4 +1,6 @@
-require('dotenv').config()
+if (!process.env.PROD) {
+  require('dotenv').config()
+}
 
 const cheerio = require('cheerio');
 const puppeteer = require('puppeteer');
