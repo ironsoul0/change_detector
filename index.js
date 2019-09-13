@@ -14,7 +14,7 @@ app.listen(process.env.PORT || 5000, function () {
 
 setInterval(function() {
   axios.get('https://bloomberg-checker.herokuapp.com/');
-}, 1000 * 60 * 5);
+}, 1000 * 60 * 4);
 
 async function getInternships() {
   const browser = await puppeteer.launch({
@@ -75,5 +75,5 @@ function checkDifference(current, initial) {
           initialContent = [...currentContent]; 
         }
       }); 
-  }, 1000 * 60 * 5);
+  }, 1000 * 60 * 2);
 })();
