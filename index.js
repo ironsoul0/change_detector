@@ -2,7 +2,14 @@ require('dotenv').config()
 
 const cheerio = require('cheerio');
 const puppeteer = require('puppeteer');
+const express = require('express');
 const sendMail = require('./mail');
+
+const app = express();
+
+app.listen(process.env.PORT || 5000, function () {
+  console.log('Port was assigned..');
+});
 
 async function getInternships() {
   const browser = await puppeteer.launch({
