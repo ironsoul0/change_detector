@@ -6,9 +6,10 @@ const sendMail = require('./mail');
 
 async function getInternships() {
   const browser = await puppeteer.launch({
-    args: ['--no-sandbox', '--disable-setuid-sandbox']
+    headless: true, 
+    args:['--no-sandbox', '--disable-setuid-sandbox']
   });
-  
+
   const page = await browser.newPage();
   await page.goto('https://careers.bloomberg.com/job/search?el=Internships');
   const bodyHTML = await page.evaluate(() => document.body.innerHTML);
