@@ -37,7 +37,6 @@ class InternshipsNotifier {
       this.getInternships()
         .then((currentContent) => {
           console.log('currentContent', currentContent);
-          currentContent = [...currentContent, 'STEP 2020'];
           
           const newEntries = this.checkDifference(currentContent, initialContent);
           if (newEntries.length > 0) {
