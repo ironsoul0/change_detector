@@ -35,9 +35,9 @@ class InternshipsNotifier {
 
     setInterval(() => {
       this.getInternships()
-        .then(() => {
+        .then((currentContent) => {
           console.log('currentContent', currentContent);
-          
+
           const newEntries = this.checkDifference(currentContent, initialContent);
           if (newEntries.length > 0) {
             this.notifyUsers(newEntries);
@@ -47,7 +47,7 @@ class InternshipsNotifier {
             initialContent = [...currentContent]; 
           }
         });
-    }, 1000 * 60 * 2);
+    }, 1000 * 60);
   }
 }
 

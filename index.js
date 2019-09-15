@@ -4,8 +4,8 @@ const TelegramBot = require('node-telegram-bot-api');
 
 const AppDAO = require('./db/dao');
 const InternshipsNotifier = require('./helpers/notifier');
-const bloomberg = require('./helpers/bloomberg');
-const google = require('./helpers/google');
+const getBloomberg = require('./helpers/bloomberg');
+const getGoogle = require('./helpers/google');
 
 async function main() {
   const db = new AppDAO('./database.sqlite3');
@@ -17,13 +17,27 @@ async function main() {
 
   bot.onText(/start/, async (msg) => {
     const chatId = msg.chat.id;
+    bot.sendMessage(chatId, 'You are in, bro! Stay tuned 😎');
     await db.addUser(chatId);
   });
 
-  const bloombergNotifier = new InternshipsNotifier('Bloomberg', bot, db, bloomberg);
-  const googleNotifier = new InternshipsNotifier('Google', bot, db, google);
+  bot.onText(/bloomberg/, async (msg) => {
+    const chatId = msg.chat.id;
+    const bloombergInternships = await getBloomberg();
+    bot.sendMessage(chatId, bloombergInternships.join('\n'));
+  });
+
+  bot.onText(/google/, async (msg) => {
+    const chatId = msg.chat.id;
+    const bloombergInternships = await getGoogle();
+    bot.sendMessage(chatId, bloombergInternships.join('\n'));
+  });
+
+  const bloombergNotifier = new InternshipsNotifier('Bloomberg', bot, db, getBloomberg);
+  const googleNotifier = new InternshipsNotifier('Google', bot, db, getGoogle);
   
   bloombergNotifier.start();
+  googleNotifier.start();
 }
 
 main();
