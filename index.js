@@ -3,6 +3,7 @@ require('dotenv').config()
 const TelegramBot = require('node-telegram-bot-api');
 
 const AppDAO = require('./db/dao');
+const InternshipsNotifier = require('./helpers/notifier');
 const bloomberg = require('./helpers/bloomberg');
 const google = require('./helpers/google');
 
@@ -19,8 +20,10 @@ async function main() {
     await db.addUser(chatId);
   });
 
-  bloomberg(bot, db);
-  //google(bot, db);
+  const bloombergNotifier = new InternshipsNotifier('Bloomberg', bot, db, bloomberg);
+  const googleNotifier = new InternshipsNotifier('Google', bot, db, google);
+  
+  bloombergNotifier.start();
 }
 
 main();
