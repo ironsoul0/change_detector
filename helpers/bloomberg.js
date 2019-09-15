@@ -23,11 +23,9 @@ async function getInternships() {
     const name = $(this).find($('.job-results-name')).text(); 
     const city = $(this).find($('.job-results-city')).text();
 
-    if (name.includes('2019')) {
-      continue;
+    if (!name.includes('2019')) {
+      jobsList.push(`${name} - ${city}`);
     } 
-
-    jobsList.push(`${name} - ${city}`);
   });
   
   await browser.close();
