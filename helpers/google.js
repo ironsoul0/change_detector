@@ -18,7 +18,9 @@ async function getInternships() {
 
   const stableList = [];
   for (const internship of internships) {
-    stableList.push(`${internship.job_title} - ${internship.location}`);
+    if (!internship.job_title.includes('2018') && !internship.job_title.includes('2019')) {
+      stableList.push(`${internship.job_title} - ${internship.location}`);
+    }
   }
 
   return stableList;
