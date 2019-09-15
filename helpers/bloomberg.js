@@ -21,7 +21,12 @@ async function getInternships() {
 
   jobs.each(function () {
     const name = $(this).find($('.job-results-name')).text(); 
-    const city = $(this).find($('.job-results-city')).text(); 
+    const city = $(this).find($('.job-results-city')).text();
+
+    if (name.includes('2019')) {
+      continue;
+    } 
+
     jobsList.push(`${name} - ${city}`);
   });
   
