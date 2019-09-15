@@ -44,16 +44,27 @@ class AppDAO {
     const sql = `
       CREATE TABLE IF NOT EXISTS users (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      chat_id TEXT)
+      chat_id INTEGER)
     `;
     return this.run(sql);
   }
 
-  addUser(chat_id) {
-    const sql = `
-      INSERT INTO users (chat_id) VALUES (?)
-    `;
-    return this.run(sql, [chat_id]);
+  async addUser(chat_id) {
+    const allUsers = await this.getAllUsers();
+
+    let found = false;
+    for (const user of allUsers) {
+      if (user.chat_id === chat_id) {
+        found = true;
+      }
+    }
+
+    if (!found) { 
+      const sql = `
+        INSERT INTO users (chat_id) VALUES (?)
+      `;
+      return this.run(sql, [chat_id]);
+    }
   }
 
   getAllUsers() {
