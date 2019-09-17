@@ -1,6 +1,7 @@
 require('dotenv').config()
 
 const TelegramBot = require('node-telegram-bot-api');
+const axios = require('axios');
 
 const AppDAO = require('./db/dao');
 const InternshipsNotifier = require('./helpers/notifier');
@@ -8,6 +9,10 @@ const getBloomberg = require('./helpers/bloomberg');
 const getGoogle = require('./helpers/google');
 
 async function main() {
+  setInterval(() => {
+    axios.get(`https://internship-detector.glitch.me`);
+  }, 280000);
+
   const db = new AppDAO('./database.sqlite3');
   await db.createTable();
 
@@ -29,8 +34,8 @@ async function main() {
 
   bot.onText(/google/, async (msg) => {
     const chatId = msg.chat.id;
-    const bloombergInternships = await getGoogle();
-    bot.sendMessage(chatId, bloombergInternships.join('\n'));
+    const googleInternships = await getGoogle();
+    bot.sendMessage(chatId, googleInternships.join('\n'));
   });
 
   const bloombergNotifier = new InternshipsNotifier('Bloomberg', bot, db, getBloomberg);
