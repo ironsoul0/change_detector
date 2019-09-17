@@ -20,6 +20,9 @@ async function main() {
     polling: true
   });
 
+  await db.delete(5);
+  await db.delete(6);
+
   bot.onText(/start/, async (msg) => {
     const chatId = msg.chat.id;
     bot.sendMessage(chatId, 'You are in, bro! Stay tuned 😎');

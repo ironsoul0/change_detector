@@ -49,6 +49,13 @@ class AppDAO {
     return this.run(sql);
   }
 
+  delete(id) {
+    return this.run(
+      `DELETE FROM users WHERE id = ?`,
+      [id]
+    );
+  }
+
   async addUser(chat_id) {
     const allUsers = await this.getAllUsers();
 
