@@ -24,6 +24,7 @@ async function main() {
     const chatId = msg.chat.id;
     bot.sendMessage(chatId, 'You are in, bro! Stay tuned 😎');
     await db.addUser(chatId);
+    console.log(await db.getAllUsers());
   });
 
   bot.onText(/bloomberg/, async (msg) => {
