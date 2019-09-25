@@ -8,7 +8,14 @@ const InternshipsNotifier = require('./helpers/notifier');
 const getBloomberg = require('./helpers/bloomberg');
 const getGoogle = require('./helpers/google');
 
+const getGoogleApply = require('./helpers/googleApply');
+
 async function main() {
+  const data = await getGoogleApply();
+  console.log(data);
+
+  return;
+  
   setInterval(() => {
     axios.get(`https://internship-detector.glitch.me`);
   }, 280000);
