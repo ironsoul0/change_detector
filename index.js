@@ -11,11 +11,6 @@ const getGoogle = require('./helpers/google');
 const getGoogleApply = require('./helpers/googleApply');
 
 async function main() {
-  const data = await getGoogleApply();
-  console.log(data);
-
-  return;
-  
   setInterval(() => {
     axios.get(`https://internship-detector.glitch.me`);
   }, 280000);
@@ -42,15 +37,17 @@ async function main() {
 
   bot.onText(/google/, async (msg) => {
     const chatId = msg.chat.id;
-    const googleInternships = await getGoogle();
+    const googleInternships = await getGoogleApply();
     bot.sendMessage(chatId, googleInternships.join('\n'));
   });
 
   const bloombergNotifier = new InternshipsNotifier('Bloomberg', bot, db, getBloomberg);
   const googleNotifier = new InternshipsNotifier('Google', bot, db, getGoogle);
+  const googleApplyNotifier = new InternshipsNotifier('Google (Apply was opened)', bot, db, getGoogleApply, 5);
   
   bloombergNotifier.start();
   googleNotifier.start();
+  googleApplyNotifier.start();
 }
 
 main();

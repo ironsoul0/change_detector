@@ -1,9 +1,10 @@
 class InternshipsNotifier {
-  constructor(name, bot, db, getInternships) {
+  constructor(name, bot, db, getInternships, checkInterval) {
     this.name = name;
     this.bot = bot;
     this.db = db;
     this.getInternships = getInternships;
+    this.checkInterval = checkInterval || 1;
   }
 
   checkDifference(current, initial) {
@@ -47,7 +48,7 @@ class InternshipsNotifier {
             initialContent = [...currentContent]; 
           }
         });
-    }, 1000 * 60);
+    }, this.checkInterval * 1000 * 60);
   }
 }
 
