@@ -16,9 +16,7 @@ async function getInternshipDetails(internship) {
   const jobDetails = currentPageContent.data;
   const exactID = extractID(jobID);
 
-  const locationCity = jobDetails.location && jobDetails.location.city;
-
-  if (jobDetails.apply_url && (locationCity === 'London' || jobDetails.title.includes('STEP'))) {
+  if (jobDetails.apply_url) {
     return `${internship.job_title} - ${REDIRECT_URI + exactID}`;
   } else {
     return ``;
@@ -44,10 +42,12 @@ async function getInternships() {
     if (internship.job_title.includes('2018') || internship.job_title.includes('2019')) {
       continue;
     }
-    if (!internship.job_id) {
+    if (!internship.job_id || internship.location.includes('USA')) {
       continue;
     }
-    promisesList.push(getInternshipDetails(internship));
+    if (internship.location.includes('London') || internship.job_title.includes('STEP')) {
+      promisesList.push(getInternshipDetails(internship));
+    }
   }
 
   let finalInternhips = await Promise.all(promisesList);

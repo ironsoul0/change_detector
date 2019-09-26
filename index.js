@@ -7,7 +7,6 @@ const AppDAO = require('./db/dao');
 const InternshipsNotifier = require('./helpers/notifier');
 const getBloomberg = require('./helpers/bloomberg');
 const getGoogle = require('./helpers/google');
-
 const getGoogleApply = require('./helpers/googleApply');
 
 async function main() {
@@ -43,7 +42,7 @@ async function main() {
 
   const bloombergNotifier = new InternshipsNotifier('Bloomberg', bot, db, getBloomberg);
   const googleNotifier = new InternshipsNotifier('Google', bot, db, getGoogle);
-  const googleApplyNotifier = new InternshipsNotifier('Google (Apply was opened)', bot, db, getGoogleApply, 5);
+  const googleApplyNotifier = new InternshipsNotifier('Google (Apply was opened)', bot, db, getGoogleApply, 2);
   
   bloombergNotifier.start();
   googleNotifier.start();
