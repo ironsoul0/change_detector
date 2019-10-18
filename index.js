@@ -40,14 +40,14 @@ async function main() {
     bot.sendMessage(chatId, googleInternships.join('\n'));
   });
 
-  bot.onText(/bye/, async (msg) => {
-    const message = 'Internships are finally open, so it is probably time to say goodbye 😭 (Hi, Nurda)\nBot will continue to work but feel free to unsubscribe.\n\nI would be really pleased if you give this bot a star on GitHub.\n\nHope everyone will find an internship he wants ❤️\n\nhttps://github.com/ironsoul0/change_detector'
+  // bot.onText(/bye/, async (msg) => {
+  //   const message = 'Internships are finally open, so it is probably time to say goodbye 😭 (Hi, Nurda)\nBot will continue to work but feel free to unsubscribe.\n\nI would be really pleased if you give this bot a star on GitHub.\n\nHope everyone will find an internship he wants ❤️\n\nhttps://github.com/ironsoul0/change_detector'
 
-    const allUsers = await db.getAllUsers();
-    for (const user of allUsers) {
-      bot.sendMessage(user.chat_id, message);
-    }
-  });
+  //   const allUsers = await db.getAllUsers();
+  //   for (const user of allUsers) {
+  //     bot.sendMessage(user.chat_id, message);
+  //   }
+  // });
 
   const bloombergNotifier = new InternshipsNotifier('Bloomberg', bot, db, getBloomberg);
   const googleNotifier = new InternshipsNotifier('Google', bot, db, getGoogle);
